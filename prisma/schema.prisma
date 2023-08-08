@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model Todo{
+  id String @id @default(uuid())
+  title String
+  description String
+  complete Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt//updates field every single time you make change
+}
+
+model User{
+  id String @id @default(uuid())
+  username String
+  avatar String
+  password String
+  age String
+  active Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt//updates field every single time you make change
+}
+// migrate model to db,command. npx prisma migrate dev --name init
